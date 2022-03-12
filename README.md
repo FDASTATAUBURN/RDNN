@@ -17,9 +17,8 @@
 # Deep Neural Network Hyperparameters 
 - L: number of layers 
 - p: neurons per layer (uniform for all layers)
-- s: l1 penalty parameter
-- Loss function: square loss/ huber loss/ check loss
-- Dropout rate: data dependent
+- s: dropout rate (data dependent)
+- Loss function: absolute value loss/ square loss/ huber loss/ check loss
 - Batch size: data dependent
 - Epoch number: data dependent
 - Activation function: ReLU
