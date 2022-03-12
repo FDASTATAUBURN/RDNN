@@ -38,9 +38,10 @@ for(i in 1:n){
    Data[[i]]=array(e_p, c(N[1], N[2]))+array(y_train.true, c(N[1], N[2]))
 }
 
-rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
+r=rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
 
-
+#L2 loss
+mean((r$estimation-y_train.true)^2)
 
 
 ####################Slash##################################
@@ -77,8 +78,10 @@ for(i in 1:n){
   e_p=mvrnorm(1, rep(0, N[1]*N[2]), (cov[,,1]+cov[,,2])) + error[i]
   Data[[i]]=array(e_p, c(N[1], N[2]))+array(y_train.true, c(N[1], N[2]))
 }
-rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
+r=rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
 
+#L2 loss
+mean((r$estimation-y_train.true)^2)
 
 
 
@@ -112,8 +115,10 @@ for(i in 1:n){
 e_p=mvrnorm(1, rep(0, N[1]*N[2]*N[3]), (cov[,,1]+cov[,,2]+cov[,,3]))+rnorm(1, 0, 1)
 Data[[i]]=array(e_p, c(N[1], N[2], N[3]))+array(y_train.true, c(N[1], N[2], N[3]))
 }
-rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
+r=rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
 
+#L2 loss
+mean((r$estimation-y_train.true)^2)
 
 
 
@@ -148,6 +153,8 @@ for(i in 1:n){
   Data[[i]]=array(e_p, c(N[1], N[2], N[3]))+array(y_train.true, c(N[1], N[2], N[3]))
 }
 
-rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
+r=rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
 
 
+#L2 loss
+mean((r$estimation-y_train.true)^2)
