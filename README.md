@@ -31,4 +31,4 @@
 -------------------------------------------------------------
 
 # Examples
-- "example.R": 
+- "example.R": 2D and 3D functional data regression examples. Cauchy and Slash distributed measurement errors are added to the observations. 
