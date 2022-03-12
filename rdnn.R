@@ -11,33 +11,54 @@
 #loss: Character of Loss function, "l1", "l2", "huber" or "check".
 #quantile: Numerical value between 0 and 1, when loss function is "check".
 
+
+#return: A list of numbers, including:
+  # plot.dnn: a plot of estimations(up to 3 dimensions).
+  # estimation: an array containing the estimation via deep neural network.
+  # pse: prediction error of the whole data with cross-validated model.
+  
 library(keras)
 library(tensorflow)
 rFDADNN=function(Data, d, Grid, N, n, L, p, s, epoch, batch, loss, quantile=NULL){
   #Process grid points
   if(d==1){
     x_train=Grid[[1]]
+    x_train.all=rep(x_train, n)
   }else if(d==2){
     x1=rep(rep(Grid[[1]],N[2]))
     x2=rep(Grid[[2]],each=N[1])
     x_train=cbind(x1,x2)
+    x1.all=rep(x1, n)
+    x2.all=rep(x2, n)
+    x_train.all=cbind(x1.all, x2.all)
   }else if(d==3){
     x1=rep(Grid[[1]],N[2]*N[3])
     x2=rep(rep(Grid[[2]],each=N[1]),N[3])
     x3=rep(Grid[[3]],each=N[1]*N[2])
     x_train=cbind(x1,x2,x3)
+    x1.all=rep(x1, n)
+    x2.all=rep(x2, n)
+    x3.all=rep(x3, n)
+    x_train.all=cbind(x1.all, x2.all, x3.all)
   }else if(d==4){
     x1=rep(rep(Grid[[1]],N[2]*N[3]*N[4]))
     x2=rep(rep(Grid[[2]],each=N[1]),N[3]*N[4])
     x3=rep(rep(Grid[[3]],each=N[1]*N[2]), N[4])
     x4=rep(Grid[[4]],each=N[1]*N[2]*N[3])
     x_train=cbind(x1,x2,x3, x4)
+    x1.all=rep(x1, n)
+    x2.all=rep(x2, n)
+    x3.all=rep(x3, n)
+    x4.all=rep(x4, n)
+    x_train.all=cbind(x1.all, x2.all, x3.all, x4.all)
   }
   y_train.raw=matrix(NA, n, base::prod(N))
   for(i in 1:n){
     y_train.raw[i, ]=as.vector(Data[[i]])
   }
-  y_train=base::colMeans(y_train.raw)
+  y_train=as.vector(t(y_train.raw))
+  
+ 
   
   
   
@@ -87,10 +108,11 @@ rFDADNN=function(Data, d, Grid, N, n, L, p, s, epoch, batch, loss, quantile=NULL
   
   
   history <- model %>% keras::fit(
-    x_train, y_train, 
+    x_train.all, y_train, 
     epochs = epoch, batch_size = batch
   )
   y.reg=model %>% stats::predict(x_train)
+  y.reg.all=model %>% stats::predict(x_train.all)
   if(d==1){
     estimation=array(y.reg, N)
   }else if(d==2){
@@ -100,7 +122,7 @@ rFDADNN=function(Data, d, Grid, N, n, L, p, s, epoch, batch, loss, quantile=NULL
   }else if(d==4){
     estimation=array(y.reg, c(N[1], N[2], N[3], N[4]))
   }
-  pse=mean((y.reg-y_train)^2)
+  pse=mean((y.reg.all-y_train)^2)
   if(d==1){
     plot.dnn=plot(x_train, y.reg, main="DNN estimation of 1d curve", type="l", xlab="Grids", ylab="Estimation")
   }else if(d==2){
