@@ -27,7 +27,7 @@
 -------------------------------------------------------------
 
 # Function descriptions
-- "rdnn_.R": robust dnn estimation for multi-dimensional funtional data, with dimension no more than 4.
+- "rdnn.R": robust dnn estimation for multi-dimensional funtional data, with dimension no more than 4. More details can be found in the file.
 -------------------------------------------------------------
 
 # Examples
