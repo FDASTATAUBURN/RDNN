@@ -15,7 +15,7 @@
 - Output: ![Y](https://latex.codecogs.com/gif.latex?Y_%7Bij%7D)
 -------------------------------------------------------------
 
-# Deep Neural Network Hyperparameters 
+# Deep Neural Network Hyperparameters and Structures
 - L: number of layers 
 - p: neurons per layer (uniform for all layers)
 - s: dropout rate (data dependent)
