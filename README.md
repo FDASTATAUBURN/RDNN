@@ -1,4 +1,4 @@
-# Robust Deep Neural Network Estimation for Multi-dimensional Functional Data
+# Robust deep neural network estimation for multi-dimensional functional data
 ------------------------------------------------
 
 # Functional Data Regression Model
