@@ -4,7 +4,7 @@ library(VGAM)
 source("rdnn.R")
 #######2d#######
 ####################Cauchy##################################
-d=2; n=100; N=c(10,10); L=1;p=500;s=0.5;epoch=500;batch=256
+d=2; n=100; N=c(10,10); L=1;p=500;s=0.5;epoch=100;batch=256
 error=0.5*rcauchy(n,location = 0, scale = 0.5)+0.5*rnorm(n)
 
 Grid=list()
@@ -45,7 +45,7 @@ mean((r$estimation-y_train.true)^2)
 
 
 ####################Slash##################################
-d=2; n=100; N=c(10,10); L=1;p=500;s=0.5;epoch=500;batch=256
+d=2; n=100; N=c(10,10); L=1;p=500;s=0.5;epoch=100;batch=256
 error=0.5*rslash(n, mu = 0, sigma = 0.5)+0.5*rnorm(n)
 
 Grid=list()
@@ -88,7 +88,7 @@ mean((r$estimation-y_train.true)^2)
 
 #######3d#######
 ####################Cauchy##################################
-d=3; n=100; N=c(5, 5, 5); L=1;p=500;s=0.5;epoch=500;batch=256
+d=3; n=100; N=c(5, 5, 5); L=1;p=500;s=0.5;epoch=100;batch=256
 error=0.5*rcauchy(n,location = 0, scale = 0.5)+0.5*rnorm(n)
 Grid=list()
 Grid[[1]]=seq(1/N[1],1,length.out = N[1])
@@ -125,7 +125,7 @@ mean((r$estimation-y_train.true)^2)
 
 
 ####################Slash##################################
-d=3; n=100; N=c(5, 5, 5); L=1;p=500;s=0.5;epoch=500;batch=256
+d=3; n=100; N=c(5, 5, 5); L=1;p=500;s=0.5;epoch=100;batch=256
 error=0.5*rcauchy(n,location = 0, scale = 0.5)+0.5*rnorm(n)
 Grid=list()
 Grid[[1]]=seq(1/N[1],1,length.out = N[1])
