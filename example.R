@@ -155,6 +155,5 @@ for(i in 1:n){
 
 r=rFDADNN(Data, d, Grid, N, n, L, p, s, epoch, batch, "huber", quantile=NULL)
 
-
 #L2 loss
 mean((r$estimation-y_train.true)^2)
